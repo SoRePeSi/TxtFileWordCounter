@@ -1,0 +1,15 @@
+C:\Users\sofis\Documents\Progs\BookLog\bin\Debug\net6.0\BookLog.exe
+C:\Users\sofis\Documents\Progs\BookLog\bin\Debug\net6.0\BookLog.deps.json
+C:\Users\sofis\Documents\Progs\BookLog\bin\Debug\net6.0\BookLog.runtimeconfig.json
+C:\Users\sofis\Documents\Progs\BookLog\bin\Debug\net6.0\BookLog.dll
+C:\Users\sofis\Documents\Progs\BookLog\bin\Debug\net6.0\BookLog.pdb
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.csproj.AssemblyReference.cache
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.AssemblyInfoInputs.cache
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.AssemblyInfo.cs
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.csproj.CoreCompileInputs.cache
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.dll
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\refint\BookLog.dll
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.pdb
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\BookLog.genruntimeconfig.cache
+C:\Users\sofis\Documents\Progs\BookLog\obj\Debug\net6.0\ref\BookLog.dll
