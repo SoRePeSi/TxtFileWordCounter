@@ -10,6 +10,7 @@ namespace BookLog{
 		static string logPath = /*put path to file here; Example: @"C:Users\Owner\Documents\ThisFolder\Log.txt"; */
 		
 		static int totalWords = 0;
+		static int wordDifference = 0;
 			
 		static void Main(string[] args){
 			GetTotalWords();
@@ -18,7 +19,7 @@ namespace BookLog{
 			
 			// Check if log file exists. Create one if it doesn't, procceed normally if it does:
 			if(!File.Exists(logPath)){
-				string firstLine = DateTime.Now.ToString().Split(" ")[0] + $" {totalWords - GetLastLogWords()} {totalWords}";
+				string firstLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
 				
 				AddNewLog(firstLine);
 			}
@@ -27,7 +28,7 @@ namespace BookLog{
 				
 				// Change log if last logged word count is different:
 				if(IsLatestLogWordDifferent()){
-					string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {totalWords - GetLastLogWords()} {totalWords}";
+					string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
 					
 					// Add log line if last logged date is different is, change last line otherwise:
 					if(IsLatestLogDateDifferent()){
@@ -111,6 +112,23 @@ namespace BookLog{
 			return lastLogWords;
 		}
 	
+		// Calculate writing progress based on last logged day that is not the day of use:
+		static int GetWordDifference(string newOrPrevious){
+			string[] logLines = File.ReadAllLines(logPath);
+			int lastTotal = 0;
+			
+			if(newOrPrevious == "new"){
+				lastTotal = Convert.ToInt32(logLines[logLines.Length-1].Split(" ")[2]);
+			}
+			else{
+				lastTotal = Convert.ToInt32(logLines[logLines.Length-2].Split(" ")[2]);
+			}
+			
+			int wordDifference = totalWords - lastTotal;
+			
+			return wordDifference;
+		}
+		
 		// Check for empty lines in log. Erase them if they exist:
 		static void ClearEmptyLines(){
 			List<string> allLogLinesList = new List<string>();
