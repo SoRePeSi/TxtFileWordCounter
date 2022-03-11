@@ -16,7 +16,7 @@ namespace BookLog{
 			
 			Console.WriteLine($"Word count: {totalWords} words");
 			
-			
+			// Check if log file exists. Create one if it doesn't, procceed normally if it does:
 			if(!File.Exists(logPath)){
 				string firstLine = DateTime.Now.ToString().Split(" ")[0] + $" {totalWords - GetLastLogWords()} {totalWords}";
 				
@@ -25,9 +25,11 @@ namespace BookLog{
 			else{
 				ClearEmptyLines();
 				
+				// Change log if last logged word count is different:
 				if(IsLatestLogWordDifferent()){
 					string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {totalWords - GetLastLogWords()} {totalWords}";
 					
+					// Add log line if last logged date is different is, change last line otherwise:
 					if(IsLatestLogDateDifferent()){
 						AddNewLog(newLogLine);
 					}
@@ -40,6 +42,7 @@ namespace BookLog{
 			}
 		}
 		
+		// Count all words in specified folder. Disconsiders isolated punctuation for final count:
 		static void GetTotalWords(){
 			string[] partsPath = Directory.GetFiles(path);
 			
@@ -61,6 +64,7 @@ namespace BookLog{
 			}
 		}
 		
+		// Check if last logged date is different. Return true if it is, false otherwise:
 		static bool IsLatestLogDateDifferent(){
 			string[] todayDate = DateTime.Now.ToString().Split(" ")[0].Split("/");
 			
@@ -77,6 +81,7 @@ namespace BookLog{
 			return false;
 		}
 		
+		// Check if last logged word count is different. Return true if it is, false otherwise:
 		static bool IsLatestLogWordDifferent(){
 			if(totalWords != GetLastLogWords()){
 				return true;
@@ -85,6 +90,7 @@ namespace BookLog{
 			return false;
 		}
 		
+		// Fetch last logged date and convert to int array:
 		static int[] GetLastLogDate(){
 			string[] logLines = File.ReadAllLines(logPath);
 			string fullDate = logLines[logLines.Length-1].Split(" ")[0];
@@ -97,6 +103,7 @@ namespace BookLog{
 			return new int[] {day, month, year};
 		}
 		
+		// Fetch last logged word count and convert to int:
 		static int GetLastLogWords(){
 			string[] logLines = File.ReadAllLines(logPath);
 			int lastLogWords = Convert.ToInt32(logLines[logLines.Length-1].Split(" ")[2]);
@@ -104,6 +111,7 @@ namespace BookLog{
 			return lastLogWords;
 		}
 	
+		// Check for empty lines in log. Erase them if they exist:
 		static void ClearEmptyLines(){
 			List<string> allLogLinesList = new List<string>();
 			string[] allLogLines = File.ReadAllLines(logPath);
@@ -124,12 +132,14 @@ namespace BookLog{
 			File.WriteAllLines(logPath, allLogLines);
 		}
 
+		// Add new line to log:
 		static void AddNewLog(string newLogLine){
 			using (StreamWriter sw = File.AppendText(logPath)){
 				sw.Write($"\n{newLogLine}");
 			}
 		}
 		
+		// Chang latest line of log:
 		static void UpdateLatestLog(string newLogLine){
 			string[] logLines = File.ReadAllLines(logPath);
 			logLines[logLines.Length-1] = newLogLine;
