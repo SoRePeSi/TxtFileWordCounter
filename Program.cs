@@ -28,13 +28,17 @@ namespace BookLog{
 				
 				// Change log if last logged word count is different:
 				if(IsLatestLogWordDifferent()){
-					string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
-					
 					// Add log line if last logged date is different is, change last line otherwise:
 					if(IsLatestLogDateDifferent()){
+						wordDifference = GetWordDifference("new");
+						string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
+						
 						AddNewLog(newLogLine);
 					}
 					else{
+						wordDifference = GetWordDifference("previous");
+						string newLogLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
+						
 						UpdateLatestLog(newLogLine);
 					}
 				}

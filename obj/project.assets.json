@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sofis\\Documents\\Progs\\BookLog\\BookLog.csproj",
+      "projectUniqueName": "C:\\Users\\sofis\\Documents\\Progs\\GH\\TxtFileWordCounter\\BookLog.csproj",
       "projectName": "BookLog",
-      "projectPath": "C:\\Users\\sofis\\Documents\\Progs\\BookLog\\BookLog.csproj",
+      "projectPath": "C:\\Users\\sofis\\Documents\\Progs\\GH\\TxtFileWordCounter\\BookLog.csproj",
       "packagesPath": "C:\\Users\\sofis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sofis\\Documents\\Progs\\BookLog\\obj\\",
+      "outputPath": "C:\\Users\\sofis\\Documents\\Progs\\GH\\TxtFileWordCounter\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sofis\\AppData\\Roaming\\NuGet\\NuGet.Config",

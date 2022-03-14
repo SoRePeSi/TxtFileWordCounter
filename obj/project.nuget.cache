@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uKxD3kgmJFvSTuXRIjy1UZbQAxOmOr/noa54qnq9ZIm6bvV95bhURjizprQmVikxw1O9S36DSZg2nmQDKyPnOA==",
+  "dgSpecHash": "3LJkbZf91imlm6NmzKEBu1w3ztYie/2pk+F5/IIQiqXfTO/8ZTQ83tuvKNPZ0X3AnvD6dJRtBoA4IlECOcVM4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sofis\\Documents\\Progs\\BookLog\\BookLog.csproj",
+  "projectFilePath": "C:\\Users\\sofis\\Documents\\Progs\\GH\\TxtFileWordCounter\\BookLog.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
