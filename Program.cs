@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace BookLog{
 	class Program{
 		// Directory with the files to count from:
-		static string path = /*put path to file here; Example: @"C:Users\Owner\Documents\TxtFilesFolder"; */
+		static string[] paths = /*put path to folders here; Example: {@"C:Users\Owner\Documents\TxtFilesFolder, @"C:Users\Owner\Documents\TxtOtherFolder}"; */
 		// Log file:
 		static string logPath = /*put path to file here; Example: @"C:Users\Owner\Documents\ThisFolder\Log.txt"; */
 		
@@ -49,22 +49,24 @@ namespace BookLog{
 		
 		// Count all words in specified folder. Disconsiders isolated punctuation for final count:
 		static void GetTotalWords(){
-			string[] partsPath = Directory.GetFiles(path);
+			foreach(string link in paths){
+				string[] partsPath = Directory.GetFiles(link);
 			
-			for(int i=0; i<partsPath.Length; i++){
-				string[] lines = File.ReadAllLines(partsPath[i]);
-				
-				for(int j=0; j<lines.Length; j++){
-					string[] words = lines[j].Split(" ");
-					int amountOfPunctuation = 0;
+				for(int i=0; i<partsPath.Length; i++){
+					string[] lines = File.ReadAllLines(partsPath[i]);
 					
-					foreach(string k in words){
-						if( (k.Length == 1) && (Char.IsPunctuation(k, 0)) ){
-							amountOfPunctuation++;
+					for(int j=0; j<lines.Length; j++){
+						string[] words = lines[j].Split(" ");
+						int amountOfPunctuation = 0;
+						
+						foreach(string k in words){
+							if( (k.Length == 1) && (Char.IsPunctuation(k, 0)) ){
+								amountOfPunctuation++;
+							}
 						}
+						
+						totalWords += words.Length - amountOfPunctuation;
 					}
-					
-					totalWords += words.Length - amountOfPunctuation;
 				}
 			}
 		}
