@@ -4,22 +4,25 @@ using System.Collections.Generic;
 
 namespace BookLog{
 	class Program{
-		// Directory with the files to count from:
-		static string[] paths = /*put path to folders here; Example: {@"C:Users\Owner\Documents\TxtFilesFolder, @"C:Users\Owner\Documents\TxtOtherFolder}"; */
+		// Directories to count from:
+		static string[] folderPaths = /*put path to directories here; Example: {@"C:Users\Owner\Documents\TxtFilesFolder, @"C:Users\Owner\Documents\TxtOtherFolder}";*/;
+		// Individual files to count from:
+		static string[] filePaths = /*put path to individual files here; Example: {@"C:Users\Owner\Documents\TxtFilesFolder\file.txt, @"C:Users\Owner\Documents\TxtFilesFolder}";*/;
 		// Log file:
-		static string logPath = /*put path to file here; Example: @"C:Users\Owner\Documents\ThisFolder\Log.txt"; */
-		
+		static string logPath = /*put path to file here; Example: @"C:Users\Owner\Documents\ThisFolder\Log.txt"; */;
+
+
 		static int totalWords = 0;
 		static int wordDifference = 0;
 			
 		static void Main(string[] args){
-			GetTotalWords();
+			GetTotalWords(folderPaths, filePaths);
 			
 			Console.WriteLine($"Word count: {totalWords} words");
 			
 			// Check if log file exists. Create one if it doesn't, procceed normally if it does:
 			if(!File.Exists(logPath)){
-				string firstLine = DateTime.Now.ToString().Split(" ")[0] + $" {wordDifference} {totalWords}";
+				string firstLine = $"0/0/0 {wordDifference} {totalWords}";
 				
 				AddNewLog(firstLine);
 			}
@@ -48,11 +51,13 @@ namespace BookLog{
 		}
 		
 		// Count all words in specified folder. Disconsiders isolated punctuation for final count:
-		static void GetTotalWords(){
-			foreach(string link in paths){
-				string[] partsPath = Directory.GetFiles(link);
-			
+		static void GetTotalWords(string[] fldPaths, string[] fPaths){
+			foreach(string path in fldPaths){
+				string[] partsPath = Directory.GetFiles(path);
+				
 				for(int i=0; i<partsPath.Length; i++){
+					if(Array.Exists(fPaths, element => element == partsPath[i])) continue;
+					
 					string[] lines = File.ReadAllLines(partsPath[i]);
 					
 					for(int j=0; j<lines.Length; j++){
@@ -69,19 +74,36 @@ namespace BookLog{
 					}
 				}
 			}
+			foreach(string file in fPaths){
+				string[] lines = File.ReadAllLines(file);
+				
+				for(int j=0; j<lines.Length; j++){
+					string[] words = lines[j].Split(" ");
+					int amountOfPunctuation = 0;
+					
+					foreach(string k in words){
+						if( (k.Length == 1) && (Char.IsPunctuation(k, 0)) ){
+							amountOfPunctuation++;
+						}
+					}
+					
+					totalWords += words.Length - amountOfPunctuation;
+				}
+			}
 		}
 		
 		// Check if last logged date is different. Return true if it is, false otherwise:
 		static bool IsLatestLogDateDifferent(){
-			string[] todayDate = DateTime.Now.ToString().Split(" ")[0].Split("/");
+			int[] todayDate = Array.ConvertAll(DateTime.Now.ToString().Split(" ")[0].Split("/"), s => int.Parse(s));
+			int[] lastDate = GetLastLogDate();
 			
-			if(Convert.ToInt32(todayDate[2]) > GetLastLogDate()[2]){	// Year
+			if(todayDate[2] > lastDate[2]){	// Year
 				return true;
 			}
-			else if(Convert.ToInt32(todayDate[1]) > GetLastLogDate()[1]){	// Month
+			else if(todayDate[1] > lastDate[1]){	// Month
 				return true;
 			}
-			else if(Convert.ToInt32(todayDate[0]) > GetLastLogDate()[0]){	// Day
+			else if(todayDate[0] > lastDate[0]){	// Day
 				return true;
 			}
 			
